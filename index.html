@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ástþór Magnússon aðdáendasíða</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1, h2 {
+            font-family: 'Georgia', serif;
+        }
+        p {
+            font-size: 1.1em;
+            color: #333;
+        }
+        img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        @media (max-width: 600px) {
+            main {
+                margin: 10px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ástþór Magnússon aðdáendasíða</h1>
+    </header>
+    <main>
+        <h2>Skemmtileg staðreynd um Ástþór Magnússon</h2>
+        <p id="funFact"></p>
+        <img id="randomPhoto" alt="Ástþór Magnússon">
+    </main>
+    <footer>
+        <p>&copy; 2024 Ástþór Magnússon aðdáendasíða</p>
+    </footer>
+
+    <script>
+        const facts = [
+            "Ástþór Magnússon stofnaði fyrsta kreditkortafyrirtæki Íslands árið 1979 Eurocard og breytti þar með greiðslumiðlum landsmanna sem gerði honum kleift að verða fjárhagslega sjálfstæður.",
+            "Hann er þekktur fyrir friðarstörf sín og stofnaði friðarhreyfinguna Peace 2000 í Reykjavík árið 1994 með það markmið að koma með nýjar hugmyndir í alþjóðapólitík.",
+            "Ástþór hefur boðið sig fram til forseta Íslands sex sinnum og hefur oft verið umdeildur fyrir óvenjulegar kosningaaðferðir sem fela í sér bæði háðsádeilu og nýstárlegar kynningar.",
+            "Hann hefur gagnrýnt utanríkisstefnu Bandaríkjanna sérstaklega í tengslum við Íraksstríðið og hefur talað gegn hernaðaríhlutun sem hann segir að sé leidd áfram af hergagnaiðnaðinum.",
+            "Árið 1996 hlaut Ástþór Gandhi-mannúðarverðlaunin fyrir friðarstörf sín veitt af Gandhi Memorial International Foundation í Kaliforníu.",
+            "Hann skrifaði bókina \"Virkjum Bessastaði\" þar sem hann leggur áherslu á að forseti Íslands verði sendiherra friðar með innblástur frá sögu Alþingis á Þingvöllum árið 1000.",
+            "Ástþór hefur verið gagnrýninn á alþjóðlegar viðskiptaþvinganir gegn Rússlandi og kallað þær þjóðarmorð sérstaklega í tengslum við innrásina í Úkraínu árið 2022.",
+            "Hann er giftur rússneskættaðri lögfræðingi Natalia Wium og hefur stutt rússneska hagsmuni í alþjóðamálum þar á meðal innlimun Krímskaga.",
+            "Í forsetakosningunum 2016 fékk Ástþór aðeins 0.3% atkvæða en hélt samt áfram að berjast fyrir málstað sínum með óþreytandi elju.",
+            "Árið 2004 gaf Ástþór út línu af leikföngum sem hann nefndi \"Ástþór-bíla\" til að vekja athygli á framboði sínu og auka sýnileika sína meðal barna og foreldra.",
+            "Hann hefur lagt til að Ísland verði friðlýst svæði án hernaðar og kallað eftir afvopnun með áherslu á að koma á friði og öryggi fyrir komandi kynslóðir.",
+            "Ástþór hefur talað fyrir því að nota hraðbanka sem kosningavélar til að auðvelda kosningaferlið sem hann telur að muni auka þátttöku og tryggja öryggi.",
+            "Hann hefur stutt hugmyndina um beint lýðræði og rafrænar kosningar til að auka þátttöku almennings og draga úr miðstýringu í stjórnmálum.",
+            "Ástþór hefur verið gagnrýninn á áhrif stóru fjölmiðlanna á lýðræði og kallað eftir auknu gegnsæi og fjölbreytileika í fréttaflutningi.",
+            "Hann hefur lagt áherslu á umhverfismál og sjálfbærni í kosningabaráttu sinni og hvatt til kolefnishlutleysis með áherslu á endurnýjanlega orkugjafa.",
+            "Ástþór hefur talað fyrir aukinni þátttöku almennings í stjórnkerfinu með nútímatækni sem hann telur að muni styrkja lýðræðislegan grundvöll samfélagsins.",
+            "Hann hefur oft verið með friðartákn á fundum sínum þar á meðal stóra dúfu sem hefur vakið athygli og bros meðal áhorfenda.",
+            "Ástþór hefur lagt til að forseti Íslands noti neitunarvald sitt til að koma í veg fyrir umdeilda lagasetningu og tryggja að ákvörðanir séu teknar með hagsmuni almennings að leiðarljósi.",
+            "Hann hefur lagt til að Ísland verði vettvangur alþjóðlegra friðarviðræðna og leiðandi í mannréttindamálum með því að nýta stöðu sína í alþjóðasamfélaginu.",
+            "Ástþór hefur gagnrýnt íslenska bankakerfið harðlega og spáð fyrir um efnahagshrun sem hann telur að hafi verið leitt af óábyrgum fjármálastofnunum.",
+            "Hann hefur hvatt til stofnunar friðarháskóla á Íslandi til að rannsaka nýjar leiðir í lýðræði og friðarviðræðum með áherslu á menntun og nýsköpun.",
+            "Ástþór hefur verið virkur þátttakandi í alþjóðlegum friðarviðræðum og ráðstefnum þar sem hann hefur kynnt hugmyndir sínar um frið og mannréttindi.",
+            "Hann hefur kallað eftir því að forseti Íslands verði sendiherra friðar og umhverfisverndar á alþjóðavísu með það að markmiði að stuðla að alþjóðlegu samstarfi.",
+            "Ástþór hefur gagnrýnt verndarstefnu og tollabandalög og kallað eftir frjálsum viðskiptum sem hann telur að muni efla hagkerfið og bæta lífsgæði.",
+            "Hann hefur talað fyrir því að setja takmörk á fjölda kjörtímabila forseta til að auka lýðræði og endurnýjun í embætti sem hann telur mikilvægt fyrir heilbrigt stjórnmálakerfi.",
+            "Árið 2004 klæddist Ástþór jólasveinabúningi á kosningafundi til að vekja athygli á framboði sínu og boðskap sínum um frið og kærleika sem vakti bæði hlátur og athygli fjölmiðla.",
+            "Ástþór var handtekinn í mótmælum gegn Íraksstríðinu þegar hann benti á að íslensk farþegaþota gæti orðið skotmark fyrir hryðjuverkamenn sem sýndi hans mikla áherslu á frið og öryggi.",
+            "Hann hefur tekið þátt í hátíðahöldum þar sem hann hefur verið klæddur sem jólasveinn og dreift gjöfum til barna sem hefur vakið gleði og bros meðal yngstu kynslóðarinnar.",
+            "Ástþór kærði íslensk stjórnvöld fyrir brot á mannréttindum í tengslum við utanríkisstefnu landsins sem sýnir hans óbilandi áhuga á réttlæti og mannréttindum.",
+            "Hann hefur verið kærður í tengslum við mótmælaaðgerðir þar á meðal vegna ólöglegra samkoma og mótmæla sem hefur stundum sett hann í miðju deilna.",
+            "Ástþór á þrjú börn sem hann hefur alltaf talað um með miklu stolti og ástúð og hefur oft sagt að þau séu hans stærsta afrek í lífinu.",
+            "Hann hefur stofnað fleiri fyrirtæki þar á meðal ýmis nýsköpunarfyrirtæki sem hafa stuðlað að aukinni tækniþróun og atvinnusköpun á Íslandi.",
+            "Ástþór hefur verið gagnrýninn á ýmsa þætti í íslensku stjórnkerfi og lagt fram tillögur um endurbætur til að auka gegnsæi og ábyrgð.",
+            "Hann hefur lagt mikla áherslu á menntun og telur að Ísland eigi að vera leiðandi í menntamálum á alþjóðavísu með því að nýta nýjustu tækni og rannsóknir.",
+            "Ástþór hefur verið virkur í baráttunni fyrir jafnrétti og hefur talað fyrir því að auka réttindi minnihlutahópa með áherslu á réttlæti og mannúð."
+        ];
+
+        const photos = [
+            "photo (1).jpg",
+            "photo (2).jpg",
+            "photo (3).jpg",
+            "photo (4).jpg",
+            "photo (5).jpg",
+            "photo (6).jpg",
+            "photo (7).jpg",
+            "photo (8).jpg",
+            "photo (9).jpg",
+            "photo (10).jpg",
+            "photo (11).jpg",
+            "photo (12).jpg",
+            "photo (13).jpg",
+            "photo (14).jpg",
+            "photo (15).jpg",
+            "photo (16).jpg",
+            "photo (17).jpg"
+        ];
+
+        const getRandomFact = () => facts[Math.floor(Math.random() * facts.length)];
+        const getRandomPhoto = () => photos[Math.floor(Math.random() * photos.length)];
+
+        document.getElementById('funFact').innerText = getRandomFact();
+        document.getElementById('randomPhoto').src = getRandomPhoto();
+    </script>
+</body>
+</html>
